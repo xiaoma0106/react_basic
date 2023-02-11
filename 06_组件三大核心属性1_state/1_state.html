@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件实例三大核心属性1_state</title>
+</head>
+<body>
+
+    <div id="test"></div>
+
+    <!-- 引入React库-->
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        //1.创建类组件
+        class Weather extends React.Component {
+            constructor(props){
+                super(props)
+                this.state = {isHot:false}
+                this.test = this.changeWeather.bind(this)
+            }
+            render(){
+                const isHot = this.state.isHot
+                return <h2 onClick = {this.test}>今天天气很{isHot? '炎热':'凉爽'}.</h2>
+            }
+
+            changeWeather(){
+                const isHot = this.state.isHot
+                this.setState({isHot:!isHot})
+                console.log(!isHot)
+            }
+        }
+
+        //2.渲染DOM
+        ReactDOM.render(<Weather/>,document.getElementById("test"))
+
+    </script>
+    
+</body>
+</html>

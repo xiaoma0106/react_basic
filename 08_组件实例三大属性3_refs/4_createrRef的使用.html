@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2_回调函数形式的ref</title>
+</head>
+<body>
+
+    <div id="test"></div>
+
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Login extends React.Component {
+            // 1.通过React.createRef()创建ref容器,并赋值给类变量
+            myRef = React.createRef()
+            myRef2 = React.createRef()
+
+            showData = ()=>{
+                // 3.获取该容器 this.myRef 
+                //   获取该容器中节点对象 this.myRef.current
+                //   获取该容器中节点对象的值 this.myRef.current.value
+                alert(this.myRef.current.value)
+            }
+
+            showData2 = ()=>{
+                alert(this.myRef2.current.value)
+            }
+
+            // 2. 定义ref={this.myRef},表明该节点放在myRef容器中
+            render(){
+                return (
+                    <div>
+                        <input ref={this.myRef} type="text" placeholder="点击按钮显示提示数据"/>&nbsp;
+                        <button onClick={this.showData}>点击展示左侧内容</button>&nbsp;
+                        <input ref={this.myRef2} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据" />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Login/>,document.getElementById("test"))        
+    </script>
+    
+</body>
+</html>

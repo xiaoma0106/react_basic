@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="test"></div>
+    <div id="test2"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+    <!-- 引入prop-types,用于对组件标签属性进行限制 -->
+    <script type="text/javascript" src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        // 定义组件
+        class Person extends React.Component {
+            render(){
+                const {name,age,gender,speak} = this.props
+                console.log(this)
+                // props是只读的,不能重新赋值
+                // this.props.name = "NEWName"
+                // speak()
+                return (
+                    <ul>
+                        <li>姓名:{name}</li>    
+                        <li>年龄:{age}</li>    
+                        <li>性别:{gender}</li>    
+                    </ul>
+                )
+            }
+        }
+        //对标签属性进行类型,必要性限制.要引入必要的prop-types.js库
+        Person.propTypes = {
+            name:PropTypes.string,//限制为必传值,且为字符串
+            age:PropTypes.number,//限制为数值
+            gender:PropTypes.string,
+            speak:PropTypes.func
+        }
+
+        Person.defaultProps = {
+            name:"TTT",
+            age:18
+        }
+
+        function speak(){
+            console.log("I speak......")
+        }
+
+        // 渲染组件到DOM
+        ReactDOM.render(<Person name='MJH' age={28} gender='male' speak = {speak}/>,document.getElementById("test"))
+
+        const p = {gender:'femal'}
+        ReactDOM.render(<Person {...p}/>,document.getElementById("test2"))
+    </script>
+    
+</body>
+</html>
