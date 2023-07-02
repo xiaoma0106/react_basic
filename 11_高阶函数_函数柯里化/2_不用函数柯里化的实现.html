@@ -23,6 +23,7 @@
 
             saveFormat=(event,para)=> {
                 this.setState({[para]:event.target.value})
+                // this.setState({para:event.target.value}) // para不加[]的话,由于放在json对象{}的左边,会被当成字符串,而不是取该变量的值.
             }
 
             submitHandler = ()=>{

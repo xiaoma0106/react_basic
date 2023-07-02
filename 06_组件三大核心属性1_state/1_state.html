@@ -21,11 +21,20 @@
                 this.state = {isHot:false}
                 this.test = this.changeWeather.bind(this)
             }
+
+            // 组件中render方法中的this为组件实例对象
             render(){
                 const isHot = this.state.isHot
                 return <h2 onClick = {this.test}>今天天气很{isHot? '炎热':'凉爽'}.</h2>
             }
 
+            /**
+             * 组件中自定义的方法中的this为undefined,如何解决?
+             * a)强制绑定this,通过函数对象的bind()
+             * b)箭头函数
+             * 
+             * 
+             */
             changeWeather(){
                 const isHot = this.state.isHot
                 this.setState({isHot:!isHot})
